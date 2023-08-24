@@ -1,0 +1,72 @@
+body{
+    display: flex;
+    background-color: #d3e1fe;
+    justify-content: center;
+    align-content: center;
+}
+
+.card{
+    background-color: #fff;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 25%;
+
+    border-radius: 1rem;
+}
+
+.info-text{
+    display: flex;
+    text-align: center;
+    width: 80%;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.annual-plan{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: center;
+
+    height: 13vh;
+   
+    padding-bottom: 0;
+    width: 70%;
+    background-color: #f8f9fe;
+    
+}
+
+.annual-plan-text{
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.annual-icon-text{
+    display: flex;
+    gap: 1rem;
+}
+
+.hero-image{
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.music-icon-image{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.proceed-button{
+    background-color: #382ae1;
+    color: #fff;
+    border-radius: 10%;
+    height: 6vh;
+    width: 80%;
+}
+
+.cancel-button{
+    margin: 5%;
+}
