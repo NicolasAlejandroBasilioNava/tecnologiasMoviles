@@ -1,20 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native';
 import { StyledText } from './src/components/StyledText';
 import { StyledTouchable } from './src/components/StyledTouchable';
 
 
 export default function App() {
+  const {height, width} = Dimensions.get('screen')
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Image source={{
+        uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png', 
+        width: 50,
+        height: 50
+        }}/>
 
-      <StyledText text= "Hola Mundo" fontSize={40} bold={true} color={'blue'}/>
-      <StyledText text= "Holaaaaa" fontSize={33} highlight={true} uppercase={true} />
-      <StyledText text= "Hola" fontSize={40} color={'green'} letterSpacing={7}/>
-
-      <StyledTouchable text= "Button" fontSize={40} padding={4} color={'white'} borderRadius={15} backgroundColor={'navy'}/>
+        <TextInput style={styles.input} placeholder='Escribe aquí' placeholderTextColor={'gray'} />
     </View>
   );
 }
@@ -26,4 +27,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  input:{
+    borderWidth: 1,
+    width: 200,
+    height: 50,
+    borderRadius: 10,
+    paddingHorizontal:10,
+    marginVertical: 10,
+    
+  }
 });
