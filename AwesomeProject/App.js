@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native';
-import { StyledText } from './src/components/StyledText';
-import { StyledTouchable } from './src/components/StyledTouchable';
+import Login from './src/screens/Login'
 
 
 export default function App() {
@@ -9,13 +8,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Image source={{
-        uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png', 
-        width: 50,
-        height: 50
-        }}/>
-
-        <TextInput style={styles.input} placeholder='Escribe aquí' placeholderTextColor={'gray'} />
+      <Login />
     </View>
   );
 }
