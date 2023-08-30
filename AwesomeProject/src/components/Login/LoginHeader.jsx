@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet} from "react-native";
+import { THEME } from "../../theme/colors";
 
 export function LoginHeader(){
 
@@ -8,7 +9,7 @@ export function LoginHeader(){
 
     return(
         <View style={styles.headerContainer}>
-            <Text style= {styles.tittleText} > Sign in to your Account </Text>
+            <Text style= {styles.tittleText} >Sign in to your Account </Text>
             <Text style= {styles.secondaryText}> Sign in to your Account </Text>
         </View>
     )
@@ -16,25 +17,25 @@ export function LoginHeader(){
 
 const styles = StyleSheet.create({
     headerContainer:{
-        backgroundColor: '#152534',
-        //alignSelf: 'start',
-        justifyContent:'left',
-        height: 250,
+        backgroundColor: THEME.COLORS.DARKBLUE,
+        justifyContent:'flex-end',
+        height: 240,
+        paddingBottom: 30,
     },
 
     tittleText:{
         fontSize: 35,
-        color: 'white',
-        paddingTop: 150,
-        paddingHorizontal: 50
+        color: THEME.COLORS.WHITE,
+        paddingTop: 100,
+        paddingHorizontal: 20,
         
     },
 
     secondaryText: {
         fontSize: 15,
-        color: 'white',
+        color: THEME.COLORS.WHITE,
         paddingTop: 5,
-        paddingHorizontal: 60
+        paddingHorizontal: 20
     }
 
 })
