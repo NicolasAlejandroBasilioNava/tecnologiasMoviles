@@ -18,14 +18,11 @@ export default function App() {
     {/*<Login />*/}
     <FlatList 
       data={personas}
-      renderItem={(item) => 
-          <View>
-            <Text style={{fontSize: 50, color: 'black'}}>{item.name}</Text>
-            <Text style={{fontSize: 50, color: 'black'}}>{item.lastName}</Text>
-          </View>
-        
-        
-        
+      renderItem={({item: {name, lastName}, index}) =>
+      <View>
+          <Text style={{fontSize: 50, color: 'black'}}>{name}</Text>
+          <Text style={{fontSize: 50, color: 'black'}}>{lastName}</Text>
+        </View>
       }
       ItemSeparatorComponent={()=>{<Text>HOLA</Text>}}
       keyExtractor={(item) => item.id}
