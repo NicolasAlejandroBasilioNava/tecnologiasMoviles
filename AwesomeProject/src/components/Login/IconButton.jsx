@@ -2,17 +2,12 @@ import {Text, Image, TouchableOpacity, View, StyleSheet } from "react-native"
 import { FacebookImage, googleImage } from "../../../assets";
 import { THEME } from "../../theme/colors";
 
-export const IconButton = ({text, source}) => {
-    
-    return(
-        
-        <TouchableOpacity style= {styles.iconButton}>
-            <Image style={styles.image} source={source}/>
-            <Text >{text}</Text>
-        </TouchableOpacity>    
-        
-    )
-}
+export const IconButton = ({text, source}) => (
+    <TouchableOpacity style= {styles.iconButton}>
+        <Image style={styles.image} source={source}/>
+        <Text >{text}</Text>
+    </TouchableOpacity>     
+)
 
 const styles = StyleSheet.create({
     iconButton:{
