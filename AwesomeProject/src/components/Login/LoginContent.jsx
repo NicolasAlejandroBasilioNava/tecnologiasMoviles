@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { THEME } from "../../theme/colors";
-import { googleImage } from "../../../assets";
+import { FacebookImage, googleImage } from "../../../assets";
+import { IconButton } from "./IconButton";
 
 export function LoginContent(){
     return(
@@ -23,20 +24,16 @@ export function LoginContent(){
               <View style= {styles.line}></View>
             </View>
 
-            <View>
-              <TouchableOpacity>
-                <Image />
-                <Text>Google</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Image source={googleImage}/>
-                <Text>Facebook</Text>
-              </TouchableOpacity>
+            <View style= {styles.iconContainer}>
+              <IconButton text={'Google'} source= {googleImage} />
+              <IconButton text={'Facebook'} source= {FacebookImage}/>
             </View>
-        </View>
-        
-        
+
+            <Text style={styles.bottomText}>
+              Don't have an account?
+              <Text style= {{color: THEME.COLORS.GREEN.DARK}}> Register </Text>
+            </Text>
+        </View>    
     )
 
 }
@@ -67,16 +64,17 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
       marginVertical: 10,
       marginTop: 5,
-      marginBottom: 10,
+      marginBottom: 15,
     },
 
     text: {
-      color: THEME.COLORS.GREEN.LIGHT,
+      color: THEME.COLORS.GREEN.DARK,
       fontSize: 13,
       textAlign: 'right',
       fontWeight: 'bold',
       alignSelf: 'flex-end',
       paddingVertical: 10,
+      marginBottom: 15,
     },
 
     touchableButton: {
@@ -87,7 +85,8 @@ const styles = StyleSheet.create({
         elevation: 3,
         alignSelf: 'center',
         width: 300,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 30,
       },
 
       touchableText: {
@@ -96,6 +95,22 @@ const styles = StyleSheet.create({
       },
 
       line: {
-        borderWidth: 1,
+        borderBottomWidth: 1,
+        flex: 1,
+        marginBottom: 8,
       },
+
+      iconContainer:{
+        flexDirection: 'row', 
+        height: 120,
+        width: 300,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+      },
+
+      bottomText:{
+        alignSelf: 'center',
+
+      },
+
   })
