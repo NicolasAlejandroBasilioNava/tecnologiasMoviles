@@ -24,7 +24,7 @@ export default function App() {
       renderItem={({item: {name, lastName, image}, index}) =>
       <Card name={name} lastName={lastName} uri= {image}/>
       }
-      ItemSeparatorComponent={()=>{<Text>HOLA</Text>}}
+      ItemSeparatorComponent={()=><Text>  </Text>}
       keyExtractor={(item) => item.id}
     />
     </View>

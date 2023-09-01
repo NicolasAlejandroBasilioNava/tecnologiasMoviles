@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        marginVertical: 15,
+        //marginVertical: 15,
         backgroundColor: THEME.COLORS.BLUE
     },
     text:{
