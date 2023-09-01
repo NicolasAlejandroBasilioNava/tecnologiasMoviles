@@ -7,6 +7,7 @@ export const THEME = {
             DARK: '#c4dd97',
         },
         GRAY: '#f6f6f6',
+        BLUE: '#11607e',
     }
 
 }
