@@ -4,21 +4,12 @@ import Constats from 'expo-constants'
 import { Ionicons } from '@expo/vector-icons';
 import { androidText } from './src/components/androidText';
 import { webText } from './src/components/webText';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 
 export default function App() {
-
-   // console.log(Platform.OS === '')
-   const CustomText = Platform.select({
-      android: () => androidText,
-      web: () => webText,
-   })
-
   return (
     <View style={styles.container}>
-      <CustomText />
-      <Text style={styles.text}>Holaar</Text>
-      <Text style={styles.text}>Holaar</Text>
-      <Ionicons name="ios-notifications-sharp" size={24} color="black" />
+      <WelcomeScreen />
       <StatusBar style="auto" />
     </View>
   );
