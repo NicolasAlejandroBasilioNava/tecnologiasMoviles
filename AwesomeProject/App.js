@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList } from 'react-native';
-import Login from './src/screens/Login'
+import Pantalla1 from './src/screens/Pantalla1'
 import { Card } from './src/components/cards';
+import Pantalla2 from './src/screens/Pantalla2';
 
 
 const personas = [
@@ -18,15 +19,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-    {/*<Login />*/}
-    <FlatList 
-      data={personas}
-      renderItem={({item: {name, lastName, image}, index}) =>
-      <Card name={name} lastName={lastName} uri= {image}/>
-      }
-      ItemSeparatorComponent={()=><Text>  </Text>}
-      keyExtractor={(item) => item.id}
-    />
+    <Pantalla2 />
+    {/* <Pantalla2 /> */}
     </View>
   );
 }
