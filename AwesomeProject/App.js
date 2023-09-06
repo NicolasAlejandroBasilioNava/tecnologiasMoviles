@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatL
 import Pantalla1 from './src/screens/Pantalla1'
 import { Card } from './src/components/cards';
 import Pantalla2 from './src/screens/Pantalla2';
+import Constats from 'expo-constants'
+import { THEME } from './src/theme/colors';
 
 
 const personas = [
@@ -15,12 +17,9 @@ const personas = [
 ]
 
 export default function App() {
-  const {height, width} = Dimensions.get('screen')
-
   return (
     <View style={styles.container}>
-    <Pantalla2 />
-    {/* <Pantalla2 /> */}
+      <Pantalla2 />
     </View>
   );
 }
@@ -28,19 +27,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 60,
+    backgroundColor: THEME.COLORS.ORANGE.SOLID,
+    marginTop: Constats.statusBarHeight,
   },
 
-  input:{
-    borderWidth: 1,
-    width: 200,
-    height: 50,
-    borderRadius: 10,
-    paddingHorizontal:10,
-    marginVertical: 10,
-    
-  }
 });
