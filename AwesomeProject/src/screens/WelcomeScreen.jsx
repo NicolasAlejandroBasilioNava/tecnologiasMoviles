@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native"
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { WelcomeCard } from "../components/card/WelcomeCard";
+import { AntDesign } from '@expo/vector-icons';
 
 const WelcomeScreen = () => {
     return(
@@ -16,22 +18,14 @@ const WelcomeScreen = () => {
             
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.cardContainer}>
-                <FontAwesome5 name="weight-hanging" size={30} color="white" />
-                <Text style={styles.cardText}>Start Training</Text>
-            </View>
-            <View style={styles.cardContainer}>
-                <FontAwesome5 name="weight-hanging" size={30} color="white" />
-                <Text style={styles.cardText}>Start Training</Text>
-            </View>
-            <View style={styles.cardContainer}>
-                <FontAwesome5 name="weight-hanging" size={30} color="white" />
-                <Text style={styles.cardText}>Start Training</Text>
-            </View>
-            <View style={styles.cardContainer}>
-                <FontAwesome5 name="weight-hanging" size={30} color="white" />
-                <Text style={styles.cardText}>Start Training</Text>
-            </View>
+            <WelcomeCard isDarkBlue text={'Start Training'} icon={<FontAwesome5 name="weight-hanging" size={30} color="white" />}/>
+            <WelcomeCard text={'Keep Training'} icon={<AntDesign name="trademark" size={24} color="gray" />}/>
+            </ScrollView>
+
+            <Text style={{fontSize: 20, fontWeight: '500'}}>What are your Symptoms?</Text>
+            <ScrollView style={styles.symptomsContainer} horizontal showsHorizontalScrollIndicator={false}>
+                <Text style={{fontSize: 10}}>I'm Fine</Text>
+                <Text style={{fontSize: 10}}>I'm Fine</Text>
             </ScrollView>
         </View>
     )
@@ -62,6 +56,18 @@ const styles = StyleSheet.create({
     cardText:{
         fontSize: 20,
         color: 'white',
+    },
+    symptomsContainer:{
+        backgroundColor: '',
+        width: 150,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        //alignItems: 'center',
+        marginTop: 20,
+        marginRight: 15,
+    },
+    symptomsText:{
+
     }
 })
 
