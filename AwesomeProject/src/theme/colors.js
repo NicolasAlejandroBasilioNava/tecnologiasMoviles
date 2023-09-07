@@ -11,7 +11,11 @@ export const THEME = {
         ORANGE:{
             SOLID: '#d76741',
             LIGHT: '#ebc0b0',
-        }
+        },
+        BLACK: '#000',
+        CREAM: '#feebd0',
+        CANARY: '#efc46b',
+        RED: '#d0694d',
     }
 
 }

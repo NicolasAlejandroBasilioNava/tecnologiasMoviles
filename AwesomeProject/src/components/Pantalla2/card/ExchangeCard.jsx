@@ -13,9 +13,9 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: THEME.COLORS.ORANGE.LIGHT,
         paddingHorizontal: 20,
-        marginHorizontal: 40,
-        borderTopEndRadius: 10,
-        borderTopStartRadius: 10,
+        marginHorizontal: 25,
+        borderTopEndRadius: 30,
+        borderTopStartRadius: 30,
         height: 50,
         justifyContent: 'center',
     },
