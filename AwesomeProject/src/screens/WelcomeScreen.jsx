@@ -1,10 +1,22 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native"
+import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native"
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { WelcomeCard } from "../components/card/WelcomeCard";
 import { AntDesign } from '@expo/vector-icons';
+import Therapist from "../components/Therapist";
+
+const CARDS =[
+    {id:1, isDarkBlue: true, text: '', iconName: ''}
+]
 
 const WelcomeScreen = () => {
+    const THERAPISTS = [
+        {id: 1, name: 'Dr. ALice Johnson', job: 'physiotherapist', rate: 5},
+        {id: 2, name: 'Dr. ALice Johnson', job: 'physiotherapist', rate: 5},
+        {id: 3, name: 'Dr. ALice Johnson', job: 'physiotherapist', rate: 5},
+        {id: 4, name: 'Dr. ALice Johnson', job: 'physiotherapist', rate: 5},
+    ]
+
     return(
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -18,6 +30,9 @@ const WelcomeScreen = () => {
             
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {CARDS.map(({ }) =>
+            <WelcomeCard />)
+            }
             <WelcomeCard isDarkBlue text={'Start Training'} icon={<FontAwesome5 name="weight-hanging" size={30} color="white" />}/>
             <WelcomeCard text={'Keep Training'} icon={<AntDesign name="trademark" size={24} color="gray" />}/>
             </ScrollView>
@@ -27,6 +42,17 @@ const WelcomeScreen = () => {
                 <Text style={{fontSize: 10}}>I'm Fine</Text>
                 <Text style={{fontSize: 10}}>I'm Fine</Text>
             </ScrollView>
+            <View style={styles.therapistTitle}>
+                <Text style={styles.titleText}>Popular therapist</Text>
+                <Text style={{color: '#d4'}}>See all</Text>
+            </View>
+            <FlatList 
+            data={THERAPISTS}
+            renderItem={({ item: {name, image, job, rate}}) =>
+            <Therapist />
+            }
+            keyExtractor={(item)=> item.id}
+            />
         </View>
     )
 }
@@ -68,6 +94,12 @@ const styles = StyleSheet.create({
     },
     symptomsText:{
 
+    },
+    therapistTitle:{
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     }
 })
 
