@@ -4,12 +4,14 @@ import Pantalla1 from './src/screens/Pantalla1'
 import Pantalla2 from './src/screens/Pantalla2';
 import Constats from 'expo-constants'
 import { THEME } from './src/theme/colors';
+import WelcomePage from './src/screens/WelcomePage';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Pantalla1 />
+      {/* <Pantalla1 /> */}
       {/* <Pantalla2 /> */}
+      <WelcomePage />
     </View>
   );
 }
@@ -17,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.COLORS.ORANGE.SOLID,
+    backgroundColor: THEME.COLORS.WHITE,
     marginTop: Constats.statusBarHeight,
   },
 
