@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 export const HomeMenuItems = ({icon, text}) =>(
     <View style={styles.icon}>
         {icon}
-        <Text style={styles.text}>{text}</Text>
+        {/* <Text style={styles.text}>{text}</Text> */}
     </View>
 )
 

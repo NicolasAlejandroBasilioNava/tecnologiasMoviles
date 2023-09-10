@@ -14,12 +14,12 @@ export const SymptomCard =({symptom}) =>(
 const styles = StyleSheet.create({
     container:{
         width: 130,
-        height: 50,
+        height: 40,
         backgroundColor: THEME.COLORS.GRAY.LIGHT,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 15,
-        borderRadius: 20,
+        marginHorizontal: 4,
+        borderRadius: 15,
         marginVertical: 20,
     },
     text:{
