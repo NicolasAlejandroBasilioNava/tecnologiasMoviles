@@ -20,6 +20,7 @@ export const THEME = {
         ORANGE:{
             SOLID: '#d76741',
             LIGHT: '#ebc0b0',
+            MID: '#ff8a39'
         },
         BLACK: '#000',
         CREAM: '#feebd0',
