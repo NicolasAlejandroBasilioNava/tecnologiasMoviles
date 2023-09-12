@@ -3,14 +3,15 @@ import { HomeMenuItems } from "./HomeMenuItems";
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { THEME } from "../../theme/colors";
 
 export const HomeMenu = () => (
     <View style={styles.menuContainer}>
         <HomeMenuItems icon={<AntDesign name="home" size={28} color="black" />} />
-        <HomeMenuItems icon={<Ionicons name="chatbox-ellipses-outline" size={28} color="black" />} />
-        <HomeMenuItems icon={<AntDesign name="calendar" size={28} color="black" />} />
-        <HomeMenuItems icon={<MaterialIcons name="portrait" size={28} color="black" />} />
+        <HomeMenuItems icon={<Feather name="shopping-bag" size={28} color="black" />} />
+        <HomeMenuItems icon={<Feather name="bell" size={28} color="black" />} />
+        <HomeMenuItems icon={<Ionicons name="person-outline" size={28} color="black" />} />
     </View>
 )
 
@@ -24,5 +25,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         gap: 20,
         alignItems: 'center',
+        marginTop: 10,
     },
 })

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity } from "react-native";
 import { NavBar } from "../components/Welcome/NavBar";
 import { THEME } from "../theme/colors";
 import { WelcomeCard } from "../components/Welcome/WelcomeCard";
@@ -8,40 +8,34 @@ import { SymptomCard } from "../components/Welcome/SymptomsCard";
 import { therapistsCardData as THERAPISTCARDS } from "../constants/therapistsCardsDATA";
 import { TherapistsCard } from "../components/Welcome/TherapistsCard";
 import { HomeMenu } from "../components/Welcome/HomeMenu";
+import { SearchInput } from "../components/Welcome/SearchInput";
+import { MaterialIcons } from '@expo/vector-icons';
+import { FilterCard } from "../components/Welcome/FilterCard";
+import { productsCardsData as PRODUCTDATA } from "../constants/productsCardsData";
+import { ProductCard } from "../components/Welcome/ProductsCard";
 
 export default function WelcomePage(){
 
     return(
         <View>
-             <NavBar />
+            <NavBar />
            <View style={styles.textContainer}>
-                <Text style={[{color: THEME.COLORS.GRAY.MID}, styles.titleText]}>Hello,</Text>
-                <Text style={styles.titleText}>Chris👋</Text>
+                <SearchInput />
+                <TouchableOpacity style={styles.filterButon}>
+                    <MaterialIcons name="settings-input-component" size={24} color="black" />
+                </TouchableOpacity>
             </View>
+            <ScrollView style={{marginHorizontal: 15}} horizontal showsHorizontalScrollIndicator={false}>
+                <FilterCard filterName='Miniso'/>
+                <FilterCard filterName='Neurso'/>
+            </ScrollView>
+            <Text style={styles.subText}>Popular Product</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                { WCARDS.map(({ text, isDarkBlue, icon },index ) =>
-                    <WelcomeCard key={index} text={text} isDarkBlue={isDarkBlue} icon={icon}/>)
+                { PRODUCTDATA.map(({ productType, productName, price, image },index ) =>
+                    <ProductCard productType={productType} productName={productName} price={price} image={image}/>)
                 }
             </ScrollView>
-            <Text style={styles.subText}>What are your symptoms?</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                { SYMCARDS.map(({symptom}, index) =>
-                    <SymptomCard key={index} symptom={symptom}/>)
-                }
-            </ScrollView>
-            <View style={{
-                flexDirection: 'row', alignItems: 'center', 
-                justifyContent: 'space-between', marginRight: 10}}>
-                <Text style={styles.subText}>Popular therapists</Text>
-                <Text style={{color: THEME.COLORS.GRAY.MID}}>See all</Text>
-            </View>
-            <FlatList style={styles.therapistList}
-                data={THERAPISTCARDS}
-                renderItem={({item: {name, therapistType, rate, icon}}) =>
-                <TherapistsCard name={name} therapistType={therapistType} rate={rate} icon={icon}/>
-                }
-                keyExtractor={(item) => item.id.toString()}
-            /> 
+            
             <HomeMenu />
         </View>
     )
@@ -53,6 +47,16 @@ const styles= StyleSheet.create({
         gap: 5,
         marginHorizontal: 15,
         marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    filterButon:{
+        height: 60,
+        width: 60,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: THEME.COLORS.CANARY,
     },
     titleText:{
         fontSize: 30,
@@ -62,6 +66,7 @@ const styles= StyleSheet.create({
         marginHorizontal: 15,
         fontSize: 25,
         fontWeight: 'bold',
+        marginBottom: 30,
     },
     therapistList:{
         height: 190,
