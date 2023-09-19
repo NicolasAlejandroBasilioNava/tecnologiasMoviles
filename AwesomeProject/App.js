@@ -14,14 +14,33 @@ const TODOS = [
   {id: 2, name: 'Task 2', completed: false},
 ]
 
+const createErrorButtonAlert =() =>
+Alert.alert(
+  'Error',
+  'Debes ingresar un nombre de tarea',
+  [{text: 'Aceptar'}]
+);
+
+
 export default function App() {
   const [todos, setTodos]= useState([])
   const [inputValue, setInputValue] = useState()
 
+  const handleDelete= (todoId) =>{
+    const filteredArray = todos.filter(
+      todo => todo.id !== todoId
+    )
+    setTodos(filteredArray)
+  }
+
   const handleAddTodo = () => {
     if( inputValue === ''){
-      return
+      return createErrorButtonAlert()
     }
+    const existingTaskName = todos.some(
+      todo => todo.name.toLowerCase() === inputValue.toLowerCase()
+    )
+    if(existingTaskName) return 
     setTodos([
       ...todos,
       {
@@ -44,9 +63,9 @@ export default function App() {
       </View>
         <FlatList 
           data={todos}
-          renderItem={(({ item: {name}}) => {
+          renderItem={(({ item: {name, id}}) => {
             return(
-              <TaskButton name={name}/>
+              <TaskButton handleDelete={handleDelete} id={id} name={name}/>
             )
           })}
           keyExtractor={(item) => item.id}

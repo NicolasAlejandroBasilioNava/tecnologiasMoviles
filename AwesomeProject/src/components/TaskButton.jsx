@@ -5,16 +5,18 @@ import { IconButton } from "./IconButton";
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { THEME } from "../theme/colors";
+import { Ionicons } from '@expo/vector-icons';
 
-export const TaskButton = ({name, onPressFunction}) => (
-    <TouchableOpacity onPress={onPressFunction}>
+export const TaskButton = ({name, onPressFunction, handleDelete, id}) => (
+    <TouchableOpacity onPress={()=> onPressFunction}>
         <View style={styles.button}>
             <View style={{width: 200}}>
                 <Text style={{fontSize: 20, fontWeight: '500', color: THEME.COLORS.MARRON}}>{name}</Text>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', gap: 20}}>
                 <IconButton icon={<Feather name="edit-3" size={24} color="#1f5514" />}/>
-                <IconButton icon={<MaterialCommunityIcons name="delete-empty-outline" size={24} color="#5b2f13" />}/>
+                <IconButton onPressFunction={()=>handleDelete(id)} id={id} icon={<MaterialCommunityIcons name="delete-empty-outline" size={24} color="#5b2f13" />}/>
+                <IconButton icon={<Ionicons name="checkmark-done-sharp" size={24} color="#1f5514" />}/>
             </View>
         </View>
     </TouchableOpacity>
