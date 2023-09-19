@@ -8,6 +8,8 @@ export const THEME = {
         GREEN: {
             LIGHT: '#c0e863',
             DARK: '#c4dd97',
+            PISTACHO: '#cdc673',
+            SOLID: '#1f5514'
         },
         GRAY:{
             LIGHT: '#e7ecfd',
@@ -26,6 +28,8 @@ export const THEME = {
         CREAM: '#feebd0',
         CANARY: '#efc46b',
         RED: '#d0694d',
+        MARRON: '#5b2f13',
+        YELLOW: '#ffebcd'
     }
 
 }
