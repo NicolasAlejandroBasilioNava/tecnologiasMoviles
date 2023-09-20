@@ -1,8 +1,8 @@
 import { TextInput, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { THEME } from "../theme/colors";
 
-export const ItemButton = ({onPressFunction, text, icon}) => (
-    <TouchableOpacity onPress={onPressFunction} style={styles.button}>
+export const ItemButton = ({onPressFunction, text, icon, id}) => (
+    <TouchableOpacity onPress={id? onPressFunction(id) : onPressFunction} style={styles.button}>
           {text ? <Text style={{color: THEME.COLORS.GREEN.SOLID}}>{text}</Text> : null}
           {icon}
     </TouchableOpacity>

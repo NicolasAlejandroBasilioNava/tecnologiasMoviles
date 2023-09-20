@@ -9,10 +9,6 @@ import { ItemButton } from './src/components/ItemButton';
 import { Input } from './src/components/Inputs/Input';
 import { TaskButton } from './src/components/TaskButton';
 
-const TODOS = [
-  {id: 1, name: 'Task 1', completed: false},
-  {id: 2, name: 'Task 2', completed: false},
-]
 
 const createErrorButtonAlert =() =>
 Alert.alert(
@@ -26,11 +22,26 @@ export default function App() {
   const [todos, setTodos]= useState([])
   const [inputValue, setInputValue] = useState()
 
-  const handleDelete= (todoId) =>{
+  const handleDeleteTask= (todoId) =>{
     const filteredArray = todos.filter(
       todo => todo.id !== todoId
     )
     setTodos(filteredArray)
+  }
+
+  const handleCompletedTask = (todoId) =>{
+    const todosUpdate = todos.map((todo) =>{
+      if (todo.id === todoId){
+        return{
+          ...todo,
+          isCompleted: !todo.isCompleted,
+          updated: new Date() + '',
+        };
+      }
+      return todo;
+    })
+
+    setTodos(todosUpdate)
   }
 
   const handleAddTodo = () => {
@@ -47,6 +58,8 @@ export default function App() {
       id: new Date().toISOString(),
       name: inputValue,
       isCompleted: false,
+      created: new Date() + '',   
+      updated: null,
     }])
     setInputValue('')
   }
@@ -63,9 +76,13 @@ export default function App() {
       </View>
         <FlatList 
           data={todos}
-          renderItem={(({ item: {name, id}}) => {
+          renderItem={(({ item: {name, id, created, updated, isCompleted}}) => {
             return(
-              <TaskButton handleDelete={handleDelete} id={id} name={name}/>
+              <TaskButton 
+                id={id} name={name} isCompleted={isCompleted}
+                handleDelete={handleDeleteTask} handleComplete={handleCompletedTask}
+                createdAt={created} updatedAt={updated}
+              />
             )
           })}
           keyExtractor={(item) => item.id}
