@@ -7,15 +7,15 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { THEME } from "../theme/colors";
 import { Ionicons } from '@expo/vector-icons';
 
-export const TaskButton = ({id, name, onPressFunction, handleDelete, handleComplete, createdAt, updatedAt, isCompleted}) => (
+export const TaskButton = ({id, name, onPressFunction, handleDelete, handleComplete, handleEdit, createdAt, updatedAt, isCompleted}) => (
     <TouchableOpacity onPress={()=> onPressFunction}>
         <View style={styles.button}>
             <View style={{width: 200}}>
                 <Text style={[{fontSize: 20, fontWeight: '500', color: THEME.COLORS.GREEN.SOLID}, isCompleted? {textDecorationLine: 'line-through', color: THEME.COLORS.MARRON} : null]}>{name}</Text>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', gap: 20}}>
-                <IconButton icon={<Feather name="edit-3" size={24} color="#1f5514" />}/>
-                <IconButton onPressFunction={()=>handleDelete(id)} icon={<MaterialCommunityIcons name="delete-outline" size={24} color="#5b2f13" />}/>
+                <IconButton onPressFunction={()=> handleEdit(id)} icon={<Feather name="edit-3" size={24} color="#1f5514" />}/>
+                <IconButton onPressFunction={()=> handleDelete(id)} icon={<MaterialCommunityIcons name="delete-outline" size={24} color="#5b2f13" />}/>
                 <IconButton onPressFunction={()=> handleComplete(id)} 
                             icon= {!isCompleted?  <Ionicons name="checkmark-done-sharp" size={24} color="#1f5514" /> :
                                                 <Ionicons name="arrow-undo-sharp" size={24} color="#5b2f13" />
@@ -26,7 +26,7 @@ export const TaskButton = ({id, name, onPressFunction, handleDelete, handleCompl
         </View>
         <View>
             {createdAt ? <Text style={styles.stampsText}>Created: {createdAt}</Text> : null}
-            {updatedAt ? <Text style={styles.stampsText}> {isCompleted? 'Completed: ' : 'Updated: '} {updatedAt}</Text> : null}
+            {updatedAt ? <Text style={styles.stampsText}>{isCompleted? 'Completed: ' : 'Updated: '}{updatedAt}</Text> : null}
         </View>
     </TouchableOpacity>
 )
