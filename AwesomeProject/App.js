@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { Modal, Alert, StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import Constats from 'expo-constants'
 import { THEME } from './src/theme/colors';
 import { ItemButton } from './src/components/ItemButton';
-import { Input } from './src/components/Inputs/Input';
 import { TaskButton } from './src/components/TaskButton';
 import { useTodos } from './src/hooks/useTodos';
+import { TaskDetailModal } from './src/components/TaskDetailModal';
 
 
 
@@ -14,17 +14,24 @@ export default function App() {
     inputValue,
     todos,
     editing,
+    detailsModal,
+    setdetailsModal,
+    setDetailsModalVisible,
     handleAddTodo,
     handleCompletedTask,
     handleDeleteTask,
     handleEditPendingTodo,
     handleEditTodo,
     setInputValue,
+    handleSeeDetails,
+    detailsModalVisible,
   } = useTodos()
 
-  
+    
   return (
     <View style={styles.container}>
+      
+
       <Text style={{fontSize: 40, fontWeight:'bold', textAlign: 'center', color: THEME.COLORS.MARRON}}>To-do List</Text>
       <View style={{flexDirection: 'row', marginVertical: 20, gap: 20}}>
         <TextInput style={styles.input}
@@ -44,13 +51,14 @@ export default function App() {
               <TaskButton 
                 id={id} name={name} isCompleted={isCompleted}
                 handleDelete={handleDeleteTask} handleComplete={handleCompletedTask}
-                handleEdit={handleEditTodo} 
+                handleEdit={handleEditTodo} onPressFunction={handleSeeDetails}
                 createdAt={created} updatedAt={updated}
               />
             )
           })}
           keyExtractor={(item) => item.id}
         />
+        <TaskDetailModal todo={detailsModal} isVisible={detailsModalVisible} modalVisible={setDetailsModalVisible}/> 
     </View>
   );
 }

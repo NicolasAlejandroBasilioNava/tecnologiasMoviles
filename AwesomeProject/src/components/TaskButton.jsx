@@ -8,7 +8,7 @@ import { THEME } from "../theme/colors";
 import { Ionicons } from '@expo/vector-icons';
 
 export const TaskButton = ({id, name, onPressFunction, handleDelete, handleComplete, handleEdit, createdAt, updatedAt, isCompleted}) => (
-    <TouchableOpacity onPress={()=> onPressFunction}>
+    <TouchableOpacity onPress={()=> onPressFunction(id)}>
         <View style={styles.button}>
             <View style={{width: 200}}>
                 <Text style={[{fontSize: 20, fontWeight: '500', color: THEME.COLORS.GREEN.SOLID}, isCompleted? {textDecorationLine: 'line-through', color: THEME.COLORS.MARRON} : null]}>{name}</Text>

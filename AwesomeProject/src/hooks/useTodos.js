@@ -6,6 +6,8 @@ export const useTodos = () =>{
   const [todos, setTodos]= useState([])
   const [inputValue, setInputValue] = useState()
   const [editing, setEditing] = useState()
+  const [detailsModal, setdetailsModal] = useState()
+  const [detailsModalVisible, setDetailsModalVisible] = useState(false);
 
   const isValidTaskName = () => {
 
@@ -106,16 +108,31 @@ export const useTodos = () =>{
     setInputValue('')
   }
 
+  const handleSeeDetails = (todoId) => {
+    const todo = todos.find( (todo) => todo.id === todoId )
+    setdetailsModal(todo)
+    setDetailsModalVisible(true)
+    
+  }
+
+  const closeDetailsModal = () => {
+    
+  };
+
   return({
     inputValue,
     todos,
+    editing,
+    detailsModal,
+    setdetailsModal,
     handleAddTodo,
     handleCompletedTask,
     handleDeleteTask,
     handleEditPendingTodo,
     handleEditTodo,
-    editing,
     setInputValue,
+    handleSeeDetails, 
+    detailsModalVisible, setDetailsModalVisible
 })
 
 
