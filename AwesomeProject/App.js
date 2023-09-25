@@ -8,8 +8,13 @@ import { useTodos } from './src/hooks/useTodos';
 import { TaskDetailModal } from './src/components/TaskDetailModal';
 import { Input } from './src/components/Inputs/Input';
 import { RickAndMorthyCard } from './src/components/RickAndMorthyCard';
+// import 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './src/screens/HomeScreen';
+import { LoginScreen } from './src/screens/LoginScreen';
 
-
+const Stack = createStackNavigator()
 
 export default function App() {
   
@@ -39,19 +44,32 @@ export default function App() {
     }, [])  
   
   return (
+    <NavigationContainer>
+
     <View style={styles.container}>
-    <ScrollView>
-      {isLoading ? (
-        <Text>Cargando</Text>
-      ) : (
-        <View style={styles.columnContainer}>
-          {data.map((character) => (
-             <RickAndMorthyCard character={character}/>
-          ))}
-        </View>
-      )}
-    </ScrollView>
+    <Stack.Navigator>
+      <Stack.Screen name='Home' component={HomeScreen}/>
+      <Stack.Screen name='Login' component={LoginScreen}/>
+    </Stack.Navigator>
+
+    {/* <FlatList 
+      keyExtractor={character.id}
+      data={data}
+      ListHeaderComponent={
+        <Text>Hola</Text>
+      }
+      renderItem={({character}) => {
+        return(
+          <RickAndMorthyCard character={character}/>
+          )
+        }}
+        ListFooterComponent={<Text>Pagination</Text>}
+        ListEmptyComponent={
+          <Text>Empty List</Text>
+        }
+      /> */}
   </View>
+  </NavigationContainer>
   );
 }
 
