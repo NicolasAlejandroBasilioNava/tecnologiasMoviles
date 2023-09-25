@@ -14,6 +14,7 @@ export const THEME = {
         GRAY:{
             LIGHT: '#e7ecfd',
             MID: '#bfc0c4',
+            DARK: '#3c3e44',
         }, 
         BLUE: {
             MID: '#11607e',
@@ -24,12 +25,13 @@ export const THEME = {
             LIGHT: '#ebc0b0',
             MID: '#ff8a39'
         },
-        BLACK: '#000',
+        BLACK: '#272b33',
         CREAM: '#feebd0',
         CANARY: '#efc46b',
         RED: '#d0694d',
         MARRON: '#5b2f13',
-        YELLOW: '#ffebcd'
+        YELLOW: '#ffebcd',
+
     }
 
 }
