@@ -8,7 +8,10 @@ import { useTodos } from './src/hooks/useTodos';
 import { TaskDetailModal } from './src/components/TaskDetailModal';
 import { Input } from './src/components/Inputs/Input';
 import { RickAndMorthyCard } from './src/components/RickAndMorthyCard';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
+const Stack = createStackNavigator()
 
 
 export default function App() {
@@ -39,19 +42,11 @@ export default function App() {
     }, [])  
   
   return (
-    <View style={styles.container}>
-    <ScrollView>
-      {isLoading ? (
-        <Text>Cargando</Text>
-      ) : (
-        <View style={styles.columnContainer}>
-          {data.map((character) => (
-             <RickAndMorthyCard character={character}/>
-          ))}
-        </View>
-      )}
-    </ScrollView>
-  </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
