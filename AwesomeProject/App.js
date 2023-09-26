@@ -10,80 +10,25 @@ import { Input } from './src/components/Inputs/Input';
 import { RickAndMorthyCard } from './src/components/RickAndMorthyCard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import WelcomeScreen from './src/screens/WelcomeScreen';
+import WelcomeBackScreen from './src/screens/WelcomeBackScreen';
+import RickAndMorthyScreen from './src/screens/RickAAndMorthyScreen';
+import RickAndMorthyInfoScreen from './src/screens/RickAndMorthyInfoScreen';
 
 const Stack = createStackNavigator()
 
 
 export default function App() {
   
-    const [input, setInput] = useState()
-    const [data, setData]= useState([])
-    const [isLoading, setIsLoading] = useState(true);
-
-    const getApiData = async ({page}) =>{
-      try{
-        const url = `https://rickandmortyapi.com/api/character/?page=${page}`
-        console.log(url)
-        const response = await fetch(url)
-        const data = await response.json()
-        setData(data.results)
-        setIsLoading(false)
-      }catch(error){
-        console.error(error);
-      }
-    }
-
-    useEffect(() => {
-      getApiData({page: 4})
-
-      // return()=>{
-      //   console.log('unmounted')
-      // }
-    }, [])  
   
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen />
+        <Stack.Screen name='Rick&MorthyList' component={RickAndMorthyScreen}/>
+        <Stack.Screen name='CharacterDetail' component={RickAndMorthyInfoScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: THEME.COLORS.BLACK,
-    paddingTop: Constats.statusBarHeight,
-    paddingHorizontal: 20,
-  },
-  input:{
-    borderWidth: 0.5, 
-    paddingHorizontal: 10, 
-    fontSize: 17, 
-    flex: 1,
-    borderRadius: 10,
-  },
-  columnContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  characterContainer: {
-    width: '48%', // Para que haya dos columnas, ajusta el ancho de los elementos
-    borderWidth: 0.5,
-    paddingHorizontal: 10,
-    marginVertical: 10,
-    borderRadius: 10,
-  },
-  characterImage: {
-    height: 70,
-    width: '100%',
-    resizeMode: 'cover', // Ajusta la imagen para que se ajuste bien
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  characterInfo: {
-    padding: 5,
-  },
-});
+

@@ -1,9 +1,11 @@
 import { View, Image, Text, StyleSheet } from "react-native"
 import { THEME } from "../theme/colors";
 import { FontAwesome } from '@expo/vector-icons';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export const RickAndMorthyCard = ({character}) => (
+export const RickAndMorthyCard = ({character, onPressFuncion}) => (
     <View style={styles.characterContainer} key={character.id}>
+        <TouchableOpacity onPress={onPressFuncion}>
         <Image style={styles.characterImage} source={{ uri: character.image }} />
         <View style={styles.characterInfo}>
             <Text style={styles.title}>{character.name ? character.name : ''} </Text>
@@ -22,6 +24,7 @@ export const RickAndMorthyCard = ({character}) => (
                 <Text style={styles.info}>{character.origin.name}</Text>
             </View>
         </View>
+    </TouchableOpacity>
     </View>
 )
 
