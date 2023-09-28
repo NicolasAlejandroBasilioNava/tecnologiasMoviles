@@ -22,9 +22,16 @@ export default function App() {
   
   
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Rick&MorthyList' component={RickAndMorthyScreen}/>
+    <NavigationContainer
+    
+    >
+      <Stack.Navigator 
+      initialRouteName='Rick&MorthyList'
+      screenOptions={{headerShown: false}}
+      >
+        <Stack.Screen name='Rick&MorthyList' component={RickAndMorthyScreen}
+          options={{headerShown: true}}
+        />
         <Stack.Screen name='CharacterDetail' component={RickAndMorthyInfoScreen}/>
       </Stack.Navigator>
     </NavigationContainer>

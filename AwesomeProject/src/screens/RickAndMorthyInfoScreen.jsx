@@ -1,12 +1,16 @@
-import { View, Text , StyleSheet, Image} from "react-native";
+import { View, Text , StyleSheet, Image, Button} from "react-native";
 import React, { useState, useEffect } from 'react';
 import { THEME } from "../theme/colors";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RickAndMorthyInfoScreen({navigation, route}){
     const {character} = route.params
     const [isLoading, setIsLoading] = useState(true);
     const [locationData, setLocationData]= useState()
     const [originData, setOriginData]= useState()
+
+    //const {canGoBack, goBack} = navigation
+    const {canGoBack, goBack} = useNavigation()
 
     const getApiData = async () =>{
         try{
@@ -97,6 +101,10 @@ export default function RickAndMorthyInfoScreen({navigation, route}){
 
           </View>
         } 
+
+        <Button title="Go back" disabled={!canGoBack}
+          onPress={() => goBack()}
+        />
         </View>
       );
 }
