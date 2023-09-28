@@ -1,12 +1,16 @@
-import { View, ScrollView, StyleSheet, Text } from "react-native";
+import { View, ScrollView, StyleSheet, Text, Switch, ActivityIndicator} from "react-native";
 import { RickAndMorthyCard } from "../components/RickAndMorthyCard";
 import { THEME } from "../theme/colors";
 import Constats from 'expo-constants'
 import React, { useState, useEffect } from 'react';
+import { isEnabled } from "react-native/Libraries/Performance/Systrace";
 
 export default function RickAndMorthyScreen({navigation, route}){
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData]= useState([])
+    const [isEnabled, setIsEnabled]= useState()
+
+   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     const getApiData = async ({page}) =>{
       try{
@@ -22,14 +26,26 @@ export default function RickAndMorthyScreen({navigation, route}){
     }
 
     useEffect(() => {
-      getApiData({page: 4})
+       getApiData({page: 4})
     }, [])
     
     return(
         <View style={styles.container}>
+          <View style={{backgroundColor: THEME.COLORS.GRAY.LIGHT, marginHorizontal: 50, flexDirection: 'row', alignItems: 'center'}}>
+            <Switch
+              trackColor={{false: '#767577', true: '#81b0ff'}}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+              style={{transform: [{scaleX: 0.8}, {scaleY: 1.4}]}}
+            />
+            {isEnabled ? <Text>Hola, esta el switch activo</Text> : <ActivityIndicator size="large" />}
+          </View>
+
             <ScrollView>
             {isLoading ? (
-                <Text>Cargando</Text>
+                <ActivityIndicator size="large" />
             ) : (
                 <View style={styles.columnContainer}>
                 {data.map((character) => (
