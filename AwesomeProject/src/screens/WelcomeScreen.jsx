@@ -11,7 +11,7 @@ export default function WelcomeScreen({navigation}){
             <Image style={{width: 300, height: 350}} source={{uri: 'https://th.bing.com/th/id/OIP.zjEnUlwgnWFdtIyqdnPRsAHaHa?pid=ImgDet&rs=1'}}/>
             <TouchableOpacity 
                 style={[styles.button, styles.getStarted]}
-                onPress={() => navigation.navigate('Ticket')}
+                onPress={() => navigation.navigate('Ticket', {menuTitle: '$234 000 000'})}
             >
                 <Text style={styles.signInButtonText}>Get Started</Text>
             </TouchableOpacity>

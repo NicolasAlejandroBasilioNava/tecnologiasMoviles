@@ -28,6 +28,7 @@ export const THEME = {
         },
         BLACK: '#272b33',
         CREAM: '#feebd0',
+        DARKCREAM: '#dfc8a4',
         CANARY: '#efc46b',
         RED: '#d0694d',
         MARRON: '#5b2f13',
