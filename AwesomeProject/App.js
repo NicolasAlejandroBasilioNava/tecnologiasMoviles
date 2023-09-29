@@ -27,10 +27,13 @@ export default function App() {
     >
       <Stack.Navigator 
       initialRouteName='Rick&MorthyList'
-      screenOptions={{headerShown: false}}
+      screenOptions={{
+          headerMode: 'screen',
+            headerTintColor: 'white',
+            headerStyle: {backgroundColor: 'tomato'}
+      }}
       >
         <Stack.Screen name='Rick&MorthyList' component={RickAndMorthyScreen}
-          options={{headerShown: true}}
         />
         <Stack.Screen name='CharacterDetail' component={RickAndMorthyInfoScreen}/>
       </Stack.Navigator>

@@ -2,15 +2,28 @@ import { View, ScrollView, StyleSheet, Text, Switch, ActivityIndicator} from "re
 import { RickAndMorthyCard } from "../components/RickAndMorthyCard";
 import { THEME } from "../theme/colors";
 import Constats from 'expo-constants'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { isEnabled } from "react-native/Libraries/Performance/Systrace";
+import { useNavigation } from "@react-navigation/native";
+import { TextInput } from "react-native-gesture-handler";
 
-export default function RickAndMorthyScreen({navigation, route}){
+export default function RickAndMorthyScreen({ route}){
+    const navigation = useNavigation()
+    const [inputValue, setInputValue] = useState()
+
+    // useEffect(() => {
+    //   navigation.setOptions({
+    //     title: 'Home Screen',
+    //     headerLargeTitle: true,
+    //     headerSearchBarOptions: {
+    //       placeholder: 'Search',
+    //     }
+    //   })
+    // }, [navigation])
+
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData]= useState([])
-    const [isEnabled, setIsEnabled]= useState()
-
-   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [filteredCharacters, setFilteredCharacters] = useState([])
 
     const getApiData = async ({page}) =>{
       try{
@@ -19,6 +32,7 @@ export default function RickAndMorthyScreen({navigation, route}){
         const response = await fetch(url)
         const data = await response.json()
         setData(data.results)
+        setFilteredCharacters(data.results)
         setIsLoading(false)
       }catch(error){
         console.error(error);
@@ -26,29 +40,30 @@ export default function RickAndMorthyScreen({navigation, route}){
     }
 
     useEffect(() => {
-       getApiData({page: 4})
+      getApiData({page: 4})
     }, [])
+
+    const filterData = (value) => {
+      if(value){
+        const filteredData = filteredCharacters.filter()
+      }else{
+        setFilteredCharacters(data)
+      }
+    }
     
     return(
         <View style={styles.container}>
-          <View style={{backgroundColor: THEME.COLORS.GRAY.LIGHT, marginHorizontal: 50, flexDirection: 'row', alignItems: 'center'}}>
-            <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
-              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-              style={{transform: [{scaleX: 0.8}, {scaleY: 1.4}]}}
-            />
-            {isEnabled ? <Text>Hola, esta el switch activo</Text> : <ActivityIndicator size="large" />}
-          </View>
-
-            <ScrollView>
+          <TextInput 
+            value={inputValue}
+            onChangeText={ (e) => setInputValue(e)}
+            style={styles.input}
+          />
+          <ScrollView>
             {isLoading ? (
-                <ActivityIndicator size="large" />
+                <Text>Cargando</Text>
             ) : (
                 <View style={styles.columnContainer}>
-                {data.map((character) => (
+                {filteredCharacters.map((character) => (
                     <RickAndMorthyCard character={character} onPressFuncion={() => navigation.navigate('CharacterDetail', {character: character})}/>
                 ))}
                 </View>
@@ -62,7 +77,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: THEME.COLORS.BLACK,
-      paddingTop: Constats.statusBarHeight,
+      //paddingTop: Constats.statusBarHeight,
       paddingHorizontal: 20,
     },
     input:{
@@ -71,6 +86,9 @@ const styles = StyleSheet.create({
       fontSize: 17, 
       flex: 1,
       borderRadius: 10,
+      paddingVertical: 10,
+  marginVertical: 10,
+  backgroundColor: 'white'     
     },
     columnContainer: {
       flexDirection: 'row',
