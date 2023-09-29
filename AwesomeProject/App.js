@@ -29,8 +29,8 @@ export default function App() {
       initialRouteName='Home'
       screenOptions={{headerShown: false}}
       >
-        <Stack.Screen name='Home' component={WelcomeScreen}/>
-        <Stack.Screen name='Ticket' component={WelcomeBackScreen}/>
+        <Stack.Screen name='Home' component={RickAndMorthyScreen}/>
+        <Stack.Screen name='Ticket' component={RickAndMorthyInfoScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

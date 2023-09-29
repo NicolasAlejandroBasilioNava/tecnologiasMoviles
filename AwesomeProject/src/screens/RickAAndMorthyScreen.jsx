@@ -11,15 +11,17 @@ export default function RickAndMorthyScreen({navigation, route}){
     const [isEnabled, setIsEnabled]= useState()
 
    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const getApiData = async ({page}) =>{
       try{
         const url = `https://rickandmortyapi.com/api/character/?page=${page}`
-        console.log(url)
+        
         const response = await fetch(url)
         const data = await response.json()
         setData(data.results)
+        await delay(5000);
         setIsLoading(false)
+        
       }catch(error){
         console.error(error);
       }
@@ -31,18 +33,6 @@ export default function RickAndMorthyScreen({navigation, route}){
     
     return(
         <View style={styles.container}>
-          <View style={{backgroundColor: THEME.COLORS.GRAY.LIGHT, marginHorizontal: 50, flexDirection: 'row', alignItems: 'center'}}>
-            <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
-              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-              style={{transform: [{scaleX: 0.8}, {scaleY: 1.4}]}}
-            />
-            {isEnabled ? <Text>Hola, esta el switch activo</Text> : <ActivityIndicator size="large" />}
-          </View>
-
             <ScrollView>
             {isLoading ? (
                 <ActivityIndicator size="large" />
