@@ -1,33 +1,34 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { THEME } from '../theme/colors';
 
-export default function WelcomeScreen(){
+export default function WelcomeScreen({navigation}){
     return(
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Welcome!</Text>
-                <Text style={styles.subtitleText}>Sign in or create a new account</Text>
+                <Text style={styles.titleText}>Play and Win!</Text>
+                <Text style={styles.subtitleText}>Game for anyone whi likes to try luck at guessing numbers.</Text>
             </View>
-            <Image style={{width: 300, height: 350}} source={{uri: 'https://th.bing.com/th/id/OIP.38IJXXXsWGd6GIlXI4tlcwHaKe?pid=ImgDet&rs=1'}}/>
-            <TouchableOpacity style={[styles.button, styles.signInButton]}>
-                <Text style={styles.signInButtonText}>Go to Sign in</Text>
+            <Image style={{width: 300, height: 350}} source={{uri: 'https://th.bing.com/th/id/OIP.zjEnUlwgnWFdtIyqdnPRsAHaHa?pid=ImgDet&rs=1'}}/>
+            <TouchableOpacity 
+                style={[styles.button, styles.getStarted]}
+                onPress={() => navigation.navigate('Ticket')}
+            >
+                <Text style={styles.signInButtonText}>Get Started</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.signUpButton]}>
-                <Text style={styles.signUpButtonText}>No account yet? 
-                    <Text style={{color: THEME.COLORS.ORANGE.MID}}> Sign UP</Text>
-                </Text>
-            </TouchableOpacity>
+            
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-        marginHorizontal: 40,
+        paddingHorizontal: 40,
         justifyContent: 'center',
-        marginBottom: 40,
+        paddingBottom: 40,
         alignItems: 'center',
-        marginTop: 80,
+        paddingTop: 80,
+        backgroundColor: THEME.COLORS.GREEN.LIGHT,
+        flex: 1,
     },
     backIcon:{
         marginVertical: 30,
@@ -39,23 +40,24 @@ const styles = StyleSheet.create({
     },
     titleText:{
         fontSize: 35,
-        width: 160,
         fontWeight: '600',
+        color: THEME.COLORS.WHITE.SOLID,
     },
     subtitleText:{
         fontSize: 15,
-        color: THEME.COLORS.GRAY.MID,
-        fontWeight: '400',
+        color: THEME.COLORS.WHITE.SOLID,
+        fontWeight: '200',
+        textAlign: 'center',
     },
     button:{
-        height: 45,
-        width: 300,
+        height: 70,
+        width: 200,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 15,
-        marginVertical: 10,
+        borderRadius: 35,
+        marginTop: 80,
     },
-    signInButton:{
+    getStarted:{
         backgroundColor: THEME.COLORS.ORANGE.MID,
     },
     signUpButton:{

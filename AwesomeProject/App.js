@@ -26,13 +26,13 @@ export default function App() {
     
     >
       <Stack.Navigator 
-      initialRouteName='Rick&MorthyList'
+      initialRouteName='Home'
       screenOptions={{headerShown: false}}
       >
-        <Stack.Screen name='Rick&MorthyList' component={RickAndMorthyScreen}
-          options={{headerShown: true}}
+        <Stack.Screen name='Home' component={WelcomeScreen}
+          
         />
-        <Stack.Screen name='CharacterDetail' component={RickAndMorthyInfoScreen}/>
+        <Stack.Screen name='Ticket' component={WelcomeBackScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

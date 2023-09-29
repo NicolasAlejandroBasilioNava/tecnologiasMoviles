@@ -6,10 +6,11 @@ export const THEME = {
             MID: '##fdfcfd',
         },
         GREEN: {
-            LIGHT: '#c0e863',
+            LIGHT: '#4d9766',
             DARK: '#c4dd97',
             PISTACHO: '#cdc673',
-            SOLID: '#1f5514'
+            SOLID: '#1f5514',
+            DEEP: '#006342',
         },
         GRAY:{
             LIGHT: '#e7ecfd',
