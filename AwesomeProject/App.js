@@ -14,26 +14,43 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import WelcomeBackScreen from './src/screens/WelcomeBackScreen';
 import RickAndMorthyScreen from './src/screens/RickAAndMorthyScreen';
 import RickAndMorthyInfoScreen from './src/screens/RickAndMorthyInfoScreen';
+import { Card } from './src/components/Card';
+import { AppContextProvider } from './src/context/AppContext';
 
 const Stack = createStackNavigator()
-
+const person = {
+  id: 1,
+  name: 'Juan',
+  lastname: 'Rivera',
+  age: 15,
+  city: 'Morelia',
+  country: 'Mexico'
+}
 
 export default function App() {
   
   
-  return (
-    <NavigationContainer
-    
-    >
-      <Stack.Navigator 
-      initialRouteName='Home'
-      screenOptions={{headerShown: false}}
-      >
-        <Stack.Screen name='Home' component={RickAndMorthyScreen}/>
-        <Stack.Screen name='Ticket' component={RickAndMorthyInfoScreen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return(
+    <AppContextProvider>
+
+
+    <View style={styles.container}>
+       <Card person={person}/>
+    </View>
+    </AppContextProvider>
+)
 }
+
+const styles = StyleSheet.create({
+container: {
+  flex: 1,
+  backgroundColor: THEME.COLORS.WHITE.SOLID,
+  paddingTop: Constats.statusBarHeight,
+  paddingHorizontal: 20,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+});
 
 
