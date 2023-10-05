@@ -16,6 +16,7 @@ import RickAndMorthyScreen from './src/screens/RickAAndMorthyScreen';
 import RickAndMorthyInfoScreen from './src/screens/RickAndMorthyInfoScreen';
 import { Card } from './src/components/Card';
 import { AppContextProvider } from './src/context/AppContext';
+import SendAmountScreen from './src/screens/SendAmountScreen';
 
 const Stack = createStackNavigator()
 const person = {
@@ -31,13 +32,11 @@ export default function App() {
   
   
   return(
-    <AppContextProvider>
-
-
-    <View style={styles.container}>
-       <Card person={person}/>
-    </View>
-    </AppContextProvider>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name= 'Send' component={SendAmountScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
 )
 }
 
@@ -54,3 +53,10 @@ container: {
 });
 
 
+//<AppContextProvider>
+
+
+    // <View style={styles.container}>
+    //    <Card person={person}/>
+    // </View>
+    // </AppContextProvider>

@@ -10,12 +10,7 @@ export const CardLocation = () => {
         <Text>Country: {person.country}</Text>
         <Text>City: {person.city}</Text>
         <CardSchool />
-
-        <TouchableOpacity 
-            onPress={handleIsActive}
-        >
-            <Text>Is active</Text>
-        </TouchableOpacity>
+        
     </View>
     )
 }
