@@ -8,7 +8,7 @@ export const CardSchool = () => {
     const {person} = useAppContext()
 
     return(
-        <View style={{backgroundColor: !person.isActive ? 'black' : 'white'}}>
+        <View style={{backgroundColor: !person.isActive ? 'brown' : 'white'}}>
         <Text>CARD SCHOOL {person.school}</Text>
         
     </View>
