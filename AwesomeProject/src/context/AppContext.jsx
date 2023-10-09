@@ -1,35 +1,24 @@
-import { Children, createContext, useState } from "react"
+import React, { createContext, useContext, useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
-const person = {
-    id: 1,
-    name: 'Juan',
-    lastname: 'Rivera',
-    age: 15,
-    city: 'Morelia',
-    country: 'Mexico',
-    school: 'ITM',
-    isActive: false,
-  }
+const AppContext = createContext();
 
-export const AppContext = createContext()
+export const useAppContext = () => useContext(AppContext);
 
-export const AppContextProvider = ({children}) =>{
-    const [personState, setPersonState] = useState(person)
+export const AppContextProvider = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-    const handleIsActive = () =>{
-        setPersonState({
-            ...personState,
-            isActive: !person.isActive
-        })
-    }
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
 
-    const values = {
-        person, handleIsActive,
-    }
-    return(
-        <AppContext.Provider value={values}>
-            {children}
-        </AppContext.Provider>
-    )
-}
+  const themeIcon = isDarkMode
+    ? <Ionicons name="sunny" size={24} color="white" />
+    : <Ionicons name="md-moon" size={24} color="white" />
 
+  return (
+    <AppContext.Provider value={{ isDarkMode, toggleTheme, themeIcon }}>
+      {children}
+    </AppContext.Provider>
+  );
+};

@@ -10,83 +10,63 @@ import { Input } from './src/components/Inputs/Input';
 import { RickAndMorthyCard } from './src/components/RickAndMorthyCard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import WelcomeScreen from './src/screens/WelcomeScreen';
-import WelcomeBackScreen from './src/screens/WelcomeBackScreen';
-import RickAndMorthyScreen from './src/screens/RickAAndMorthyScreen';
-import RickAndMorthyInfoScreen from './src/screens/RickAndMorthyInfoScreen';
 import { Card } from './src/components/Card';
 import { AppContextProvider } from './src/context/AppContext';
 import SendAmountScreen from './src/screens/SendAmountScreen';
 import MyCardMenuScreen from './src/screens/MyCardMenuScreen';
 import { Ionicons } from '@expo/vector-icons';
 import TotalBalanceScreen from './src/screens/TotalBalanceScreen';
+import ThemeToggle from './src/components/ThemeIcon';
 
 
 const Stack = createStackNavigator()
-const person = {
-  id: 1,
-  name: 'Juan',
-  lastname: 'Rivera',
-  age: 15,
-  city: 'Morelia',
-  country: 'Mexico'
-}
 
 export default function App() {
   
   
   return(
-    <NavigationContainer>
-      <Stack.Navigator
-        // screenOptions={{headerShown: true}}
-        screenOptions={{
-        headerStyle: {
-          backgroundColor: THEME.COLORS.BLACK,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-      >
-        <Stack.Screen name='MyCards' component={MyCardMenuScreen}
-          options={{
-            headerLeft: () => <Ionicons name="person" size={24} color="white" 
-                                style={{marginHorizontal: 20}}
-                              />,
-            headerTitle: ''
-          }}
-        />
-        <Stack.Screen 
-          name= 'Send' 
-          component={SendAmountScreen} 
-          options={{
-            headerRight: () => (
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                // color="#fff"
-              />
-            ),
-            // headerLeft: () => (
-            //   <Button
-            //     onPress={() => alert('This is a button!')}
-            //     title="Info"
-            //     // color="#fff"
-            //   />
-            // ),
+    <AppContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          // screenOptions={{headerShown: true}}
+          screenOptions={{
             headerStyle: {
-              alignItems: 'center',
               backgroundColor: THEME.COLORS.BLACK,
-            }
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerRight: () => (
+              <ThemeToggle />
+              ),
           }}
-        />
-        <Stack.Screen 
-          name='TotalBalance'
-          component={TotalBalanceScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          >
+          <Stack.Screen name='MyCards' component={MyCardMenuScreen}
+            options={{
+              headerLeft: () => <Ionicons name="person" size={24} color="white" 
+              style={{marginHorizontal: 20}}
+              />,
+              headerTitle: ''
+            }}
+            />
+          <Stack.Screen 
+            name= 'Send' 
+            component={SendAmountScreen} 
+            options={{
+                  headerStyle: {
+                    alignItems: 'center',
+                    backgroundColor: THEME.COLORS.BLACK,
+                  }
+                }}
+                />
+          <Stack.Screen 
+            name='TotalBalance'
+            component={TotalBalanceScreen}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppContextProvider>
 )
 }
 

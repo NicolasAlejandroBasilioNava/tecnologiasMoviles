@@ -1,9 +1,12 @@
 import { View, StyleSheet } from "react-native"
 import { CircularButton } from "../CirtularButton"
 import { THEME } from "../../theme/colors"
+import { useAppContext } from "../../context/AppContext"
 
 export const ButtonRow = ({value1, value2, value3}) => {
-    const styles= darkTheme
+  const {isDarkMode} = useAppContext()
+
+  const styles= isDarkMode ? darkTheme : lightTheme
 
     return(
         <View style={{flexDirection: 'row',}}>
@@ -18,5 +21,12 @@ const darkTheme = StyleSheet.create({
   text:{
     color: THEME.COLORS.WHITE.SOLID,
     backgroundColor: THEME.COLORS.GRAY.DEEP,
+  }
+})
+
+const lightTheme = StyleSheet.create({
+  text:{
+    color: THEME.COLORS.BLACK,
+    backgroundColor: THEME.COLORS.CREAM,
   }
 })

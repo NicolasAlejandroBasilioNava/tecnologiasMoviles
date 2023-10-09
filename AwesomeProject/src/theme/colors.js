@@ -3,7 +3,8 @@ export const THEME = {
         DARKBLUE: '#152534',
         WHITE: {
             SOLID: '#FFF',
-            MID: '##fdfcfd',
+            MID: '#fdfcfd',
+            OSTION:'#f1eee7',
         },
         GREEN: {
             LIGHT: '#4d9766',

@@ -9,10 +9,14 @@ import { therapistsCardData as peopleInfo } from "../constants/therapistsCardsDA
 import { PeopleCardInfo } from "../components/PeopleCardInfo";
 import { THEME } from "../theme/colors";
 import Constats from 'expo-constants'
+import { useAppContext } from "../context/AppContext";
+import ThemeToggle from "../components/ThemeIcon";
 
 
 export default function MyCardMenuScreen ({navigation}){
-    const styles= darkTheme
+    const {isDarkMode} = useAppContext()
+
+    const styles= isDarkMode ? darkTheme : lightTheme
 
     return(
         <View style={styles.mainContainer}>
@@ -36,8 +40,8 @@ export default function MyCardMenuScreen ({navigation}){
                 <CircularButton backgroundColor={styles.iconColor.backgroundButtonsColor} color={styles.iconColor.thirdColor} text={'Sale'} width={75} height={35}/>
             </View>
             <View style={styles.myContactContainer}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 15}}>
-                    <Text>My contacts</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 15, marginVertical: 10,}}>
+                    <Text style={styles.myContactListTitle}>My contacts</Text>
                     <Ionicons name="search-sharp" size={24} color= {styles.iconColor.mainColor} />
                 </View>
                 <FlatList 
@@ -80,14 +84,67 @@ const darkTheme= StyleSheet.create({
         backgroundColor: THEME.COLORS.GRAY.DEEP,
         marginHorizontal: 15,
         marginVertical: 10,
+        borderRadius: 25,
     },
     myContactList:{
         height: 250,
+    },
+    myContactListTitle:{
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingHorizontal: 15,
+        color: THEME.COLORS.WHITE.SOLID
     },
     iconColor: {
         mainColor: THEME.COLORS.WHITE.SOLID,
         secondaryColor: THEME.COLORS.BLACK,
         thirdColor: THEME.COLORS.GREENYELLOW,
         backgroundButtonsColor: THEME.COLORS.GRAY.DEEP,
+    }
+})
+
+const lightTheme = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: THEME.COLORS.WHITE.OSTION, // Cambiado a fondo blanco
+    },
+    title: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        paddingHorizontal: 15,
+        color: THEME.COLORS.DARKBLUE, // Cambiado a color oscuro
+    },
+    cardsContainer: {
+        marginHorizontal: 15,
+        marginVertical: 10,
+        flexDirection: 'row',
+        gap: 5,
+    },
+    transactionContainer: {
+        marginHorizontal: 15,
+        marginVertical: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    myContactContainer: {
+        backgroundColor: THEME.COLORS.WHITE.SOLID, // Cambiado a un tono de blanco más suave
+        marginHorizontal: 15,
+        marginVertical: 10,
+        borderRadius: 25,
+    },
+    myContactList: {
+        height: 250,
+    },
+    myContactListTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingHorizontal: 15,
+        color: THEME.COLORS.DARKBLUE, // Cambiado a color oscuro
+    },
+    iconColor: {
+        mainColor: THEME.COLORS.DARKBLUE, // Cambiado a color oscuro
+        secondaryColor: THEME.COLORS.BLACK, // Cambiado a blanco
+        thirdColor: THEME.COLORS.GREEN.SOLID, // Cambiado a verde sólido
+        backgroundButtonsColor: THEME.COLORS.GREENYELLOW, // Cambiado a un tono de blanco más suave
     }
 })

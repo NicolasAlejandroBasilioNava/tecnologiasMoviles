@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         height: 75,
         width: 75,
         //borderColor: THEME.COLORS.CANARY,
-        borderWidth: 0.2,
+        borderWidth: 0.1,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
