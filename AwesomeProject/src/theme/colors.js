@@ -22,6 +22,7 @@ export const THEME = {
         BLUE: {
             MID: '#11607e',
             DARK: '#3562d7',
+            TURKISH: '#55afb1',
         },
         ORANGE:{
             SOLID: '#d76741',

@@ -1,22 +1,23 @@
+import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList, TouchableOpacity, Button } from 'react-native';
 import Constats from 'expo-constants'
 import { THEME } from './src/theme/colors';
-import { ItemButton } from './src/components/ItemButton';
-import { TaskButton } from './src/components/TaskButton';
-import { useTodos } from './src/hooks/useTodos';
-import { TaskDetailModal } from './src/components/TaskDetailModal';
-import { Input } from './src/components/Inputs/Input';
-import { RickAndMorthyCard } from './src/components/RickAndMorthyCard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { Card } from './src/components/Card';
 import { AppContextProvider } from './src/context/AppContext';
 import SendAmountScreen from './src/screens/SendAmountScreen';
 import MyCardMenuScreen from './src/screens/MyCardMenuScreen';
 import { Ionicons } from '@expo/vector-icons';
 import TotalBalanceScreen from './src/screens/TotalBalanceScreen';
 import ThemeToggle from './src/components/ThemeIcon';
+import WelcomeScreen from './src/screens/WelcomeScreen';
+import WelcomeBackScreen from './src/screens/WelcomeBackScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import SingUpScreen from './src/screens/SingUpScreen';
+import MainPageScreen from './src/screens/MainPageScreen';
+import TabNavigationScreen from './src/screens/TabNavigationScreen';
+import { AuthProvider } from './src/context/AuthContext';
 
 
 const Stack = createStackNavigator()
@@ -25,10 +26,12 @@ export default function App() {
   
   
   return(
+    <AuthProvider>
+
     <AppContextProvider>
       <NavigationContainer>
         <Stack.Navigator
-          // screenOptions={{headerShown: true}}
+          initialRouteName='WelcomeScreen'
           screenOptions={{
             headerStyle: {
               backgroundColor: THEME.COLORS.BLACK,
@@ -40,33 +43,27 @@ export default function App() {
             headerRight: () => (
               <ThemeToggle />
               ),
-          }}
-          >
-          <Stack.Screen name='MyCards' component={MyCardMenuScreen}
-            options={{
-              headerLeft: () => <Ionicons name="person" size={24} color="white" 
-              style={{marginHorizontal: 20}}
-              />,
-              headerTitle: ''
             }}
-            />
-          <Stack.Screen 
-            name= 'Send' 
-            component={SendAmountScreen} 
-            options={{
-                  headerStyle: {
-                    alignItems: 'center',
-                    backgroundColor: THEME.COLORS.BLACK,
-                  }
-                }}
-                />
-          <Stack.Screen 
-            name='TotalBalance'
-            component={TotalBalanceScreen}
-            />
+            >
+            <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} 
+              options={{headerShown: false}}
+              />
+            <Stack.Screen name='Login' component={LoginScreen} 
+              options={{headerShown: false}}
+              />
+            <Stack.Screen name='SignUp' component={SingUpScreen} 
+              options={{headerShown: false}}
+              />
+           <Stack.Screen name='TabNavigation' component={TabNavigationScreen} 
+              options={{headerShown: false}}
+              />
+            <Stack.Screen name='DrawerNavigation' component={MainPageScreen} 
+              options={{headerShown: false, }}
+              />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>
+    </AuthProvider>
 )
 }
 

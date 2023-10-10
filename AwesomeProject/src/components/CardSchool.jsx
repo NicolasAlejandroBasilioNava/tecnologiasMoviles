@@ -1,5 +1,4 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { CardLocation } from "./CardLocation";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useAppContext } from "../hooks/useAppContext";
