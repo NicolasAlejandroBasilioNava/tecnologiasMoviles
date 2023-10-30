@@ -1,35 +1,37 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList, TouchableOpacity, Button } from 'react-native';
 import { THEME } from './src/theme/colors';
 
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
-import CameraButtons from './src/screens/CameraButtons';
-import CamaraComponent from './src/components/CamaraComponent';
-import VideoComponent from './src/components/VideoComponent';
+import { useReducer } from 'react';
+
+const initialState = {
+  displayNumber: 0,
+  aperator: '',
+  previousNumber: 0,
+  currentNumber: 0,
+}
+
+function reducer(state, action){
+  if(action.type === 'SELECTED_NUMBER'){
+    return(
+      ...state,
+      currentNumber: action.payload,
+    )
+  }
+}
 
 export default function App() {
-  const [camera, setCamera] = useState(false);
-  const [video, setVideo] = useState(false);
+ 
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleCamera = () => {
-    setCamera((prev) => !prev);
-    setVideo(false);
-  };
-
-  const handleVideo = () => {
-    setVideo((prev) => !prev);
-    setCamera(false);
-  };
+  const handleSeclectNumber = (number) =>{
+    dispatch{{type: 'SELECTED_NUMBER', payload: number}}
+  }
 
   return (
     <View style={styles.container}>
-      <StatusBar style='auto' />
-      {/* <Camara /> */}
-      <CameraButtons setCamera={handleCamera} setVideo={handleVideo} />
-      {camera && <CamaraComponent />}
-      {video && <VideoComponent />}
+      
     </View>
   );
 }
