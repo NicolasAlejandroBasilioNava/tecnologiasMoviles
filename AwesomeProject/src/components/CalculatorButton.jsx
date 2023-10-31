@@ -2,11 +2,11 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { THEME } from '../theme/colors';
 
-export const CalculatorButton = ({ text, role }) => {
-  const buttonStyle = role === 'number' ? styles.number : role === 'operator' ? styles.operator : role === 'extra' ? styles.extra : styles.none;
+export const CalculatorButton = ({ text, role, onPress }) => {
+  const buttonStyle = role === "number" ? styles.number : role === "operator" ? styles.operator : role === "extra" ? styles.extra : styles.none;
 
   return (
-    <TouchableOpacity style={[styles.button, buttonStyle]}>
+    <TouchableOpacity style={[styles.button, buttonStyle]} onPress={() => onPress(text)}>
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );
