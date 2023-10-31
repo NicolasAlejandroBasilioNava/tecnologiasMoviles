@@ -101,6 +101,37 @@ function reducer(state, action) {
         previousNumber: 0,
         currentNumber: 0,
       }
+    
+    case 'DELETE':
+      if (state.currentNumber) {
+        const newCurrentNumber = state.currentNumber.slice(0, -1);
+        const updatedCurrentNumber = newCurrentNumber === '' ? '0' : newCurrentNumber;
+        return {
+          ...state,
+          currentNumber: updatedCurrentNumber,
+          displayNumber: state.previousNumber && state.operator
+          ? state.previousNumber + state.operator + updatedCurrentNumber
+          : updatedCurrentNumber,
+        };
+      }
+      return state;
+
+    case 'PERCENT':
+      if (state.currentNumber) {
+        const percentValue = parseFloat(state.currentNumber) / 100;
+        const displayNumber =
+          state.previousNumber && state.operator
+            ? state.previousNumber + state.operator + percentValue.toString()
+            : percentValue.toString();
+    
+        return {
+          ...state,
+          currentNumber: percentValue.toString(),
+          displayNumber: displayNumber,
+        };
+      }
+      return state;
+      
     default:
       return state;
   }
@@ -125,6 +156,13 @@ export default function App() {
     dispatch({ type: 'CLEAR' });
   };
 
+  const handleDelete = () =>{
+    dispatch({ type: 'DELETE' })
+  }
+
+  const handlePercent = () => {
+    dispatch({ type: 'PERCENT' })
+  }
 
   return (
     <View style={styles.container}>
@@ -155,12 +193,13 @@ export default function App() {
           if (text === 'C') {
             handleClear();
           } else if (text === 'DEL') {
-            // Implement logic to delete the last character if needed
-            // For example: handleDelete();
+            handleDelete()
           } else if (text === '=') {
             handleCalculate();
             console.log(state.currentNumber)
-          } else {
+          } else if(text === '%'){
+            handlePercent()
+          }else{
             handleSelectOperator(text);
           }
         }}
@@ -217,7 +256,7 @@ export default function App() {
         }}
       />
       <RowCalculatorButtons
-        btn1Text="0"
+        btn1Text="00"
         btn1Role="number"
         btn2Text="0"
         btn2Role="number"
@@ -232,6 +271,7 @@ export default function App() {
             handleCalculate();
           }else if( text === '.'){
             //Handle .
+            handleSelectNumber(text)
           }else{
             handleSelectNumber(text)
           }
