@@ -4,8 +4,8 @@ import { THEME } from './src/theme/colors';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 
-import React, { useReducer } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useReducer, useState } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, TextComponent } from 'react-native';
 import { CalculatorButton } from './src/components/CalculatorButton';
 import { RowCalculatorButtons } from './src/components/RowCalculatorButtons';
 
@@ -164,9 +164,27 @@ export default function App() {
     dispatch({ type: 'PERCENT' })
   }
 
+  const [counter, setCounter] =useState(0)
+
+  const multiplyCounter = () =>{
+    setCounter(counter * 2)
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 30, marginHorizontal: 20, color: THEME.COLORS.WHITE.MID}}>
+      <Text>{counter}</Text>
+      <TouchableOpacity onPress={() => setCounter(counter+1)}>
+        <Text>
+          Incrementa en uno
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => multiplyCounter()}>
+        <Text>
+          Duplica
+        </Text>
+      </TouchableOpacity>
+
+      {/* <Text style={{fontSize: 30, marginHorizontal: 20, color: THEME.COLORS.WHITE.MID}}>
         Calculadora
       </Text>
       <View style={{
@@ -276,7 +294,7 @@ export default function App() {
             handleSelectNumber(text)
           }
         }}
-      />
+      /> */}
 
     </View>
   );
@@ -286,6 +304,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: THEME.COLORS.BLUE.MID,
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight + 50,
   },
 });
