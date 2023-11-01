@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { Alert, StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import Constats from 'expo-constants'
 import { THEME } from './src/theme/colors';
@@ -17,137 +17,149 @@ const createErrorButtonAlert = ({errorType, errorText}) =>{
   );
 }
 
-export default function App() {
-  const [todos, setTodos]= useState([])
-  const [inputValue, setInputValue] = useState()
-  const [editing, setEditing] = useState()
+const initialState = {
+  todos: [],
+  inputValue: '',
+  editing: null,
+};
 
-  const handleDeleteTask= (todoId) =>{
-    const filteredArray = todos.filter(
-      todo => todo.id !== todoId
-    )
-    setTodos(filteredArray)
-  }
+const todoReducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            id: new Date().toISOString(),
+            name: action.payload,
+            isCompleted: false,
+            created: new Date() + '',
+            updated: null,
+          },
+        ],
+        inputValue: '',
+      };
+    case 'DELETE_TODO':
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
+    case 'COMPLETE_TODO':
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload
+            ? {
+                ...todo,
+                isCompleted: !todo.isCompleted,
+                updated: new Date() + '',
+              }
+            : todo
+        ),
+      };
+    case 'EDIT_TODO':
+      return {
+        ...state,
+        editing: action.payload,
+        inputValue: state.todos.find((todo) => todo.id === action.payload).name,
+      };
+    case 'EDIT_PENDING_TODO':
+      const existingTaskName = state.todos.some(
+        (todo) =>
+          todo.name.toLowerCase() === state.inputValue.toLowerCase() &&
+          todo.id !== state.editing
+      );
 
-  const handleCompletedTask = (todoId) =>{
-    const todosUpdate = todos.map((todo) =>{
-      if (todo.id === todoId){
-        return{
-          ...todo,
-          isCompleted: !todo.isCompleted,
-          updated: new Date() + '',
-        };
+      if (existingTaskName) {
+        return state;
       }
-      return todo;
-    })
 
-    setTodos(todosUpdate)
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === state.editing
+            ? {
+                ...todo,
+                name: state.inputValue,
+                updated: new Date() + '',
+              }
+            : todo
+        ),
+        editing: null,
+        inputValue: '',
+      };
+    case 'UPDATE_INPUT_VALUE':
+      return { ...state, inputValue: action.payload };
+    default:
+      return state;
   }
+};
+
+export default function App() {
+  const [state, dispatch] = useReducer(todoReducer, initialState);
+
+  const handleDeleteTask = (todoId) => {
+    dispatch({ type: 'DELETE_TODO', payload: todoId });
+  };
+
+  const handleCompletedTask = (todoId) => {
+    dispatch({ type: 'COMPLETE_TODO', payload: todoId });
+  };
 
   const handleEditTodo = (todoId) => {
-    const todo = todos.find( (todo) => todo.id === todoId )
-    if(editing === todoId || todo.isCompleted){
-      setEditing(null)
-      setInputValue('')
-      if(todo.isCompleted) return createErrorButtonAlert({
-                              errorType: 'Error',
-                              errorText: 'This task has already been marked as completed.',
-                            });
-    }else{
-      setEditing(todoId)
-      setInputValue(todo.name)
+    const todo = state.todos.find((todo) => todo.id === todoId);
+    if (state.editing === todoId || todo.isCompleted) {
+      dispatch({ type: 'EDIT_TODO', payload: null });
+    } else {
+      dispatch({ type: 'EDIT_TODO', payload: todoId });
     }
-  }
+  };
 
   const handleEditPendingTodo = () => {
-    if( inputValue === ''){
-      return createErrorButtonAlert({
-        errorType: 'Error',
-        errorText: 'No puedes crear un pendiente sin nombre',
-      });
-      
-    }
-    const existingTaskName = todos.some(
-      todo => todo.name.toLowerCase() === inputValue.toLowerCase() && todo.id !== editing
-    )
-    if(existingTaskName) return createErrorButtonAlert({
-                          errorType: 'Error',
-                          errorText: 'This task has already been marked as completed.',
-                        });
-
-    const todosUpdate = todos.map((todo) =>{
-      if (todo.id === editing){
-        return{
-          ...todo,
-          name: inputValue,
-          updated: new Date() + '',
-        };
-      }
-      return todo;
-    })
-
-    setTodos(todosUpdate)
-    setEditing(null)
-    setInputValue('')
-  }
+    dispatch({ type: 'EDIT_PENDING_TODO' });
+  };
 
   const handleAddTodo = () => {
-    if( inputValue === ''){
-      return createErrorButtonAlert({
-        errorType: 'Error',
-        errorText: "You can't create a task without a name.",
-      });
-    }
-    const existingTaskName = todos.some(
-      todo => todo.name.toLowerCase() === inputValue.toLowerCase()
-    )
-    if(existingTaskName) return createErrorButtonAlert({
-                          errorType: 'Error',
-                          errorText: 'Task name already assigned, please try another one',
-                        });
-    setTodos([
-      ...todos,
-      {
-      id: new Date().toISOString(),
-      name: inputValue,
-      isCompleted: false,
-      created: new Date() + '',   
-      updated: null,
-    }])
-    setInputValue('')
+    dispatch({ type: 'ADD_TODO', payload: state.inputValue });
   }
 
   
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 40, fontWeight:'bold', textAlign: 'center', color: THEME.COLORS.MARRON}}>To-do List</Text>
-      <View style={{flexDirection: 'row', marginVertical: 20, gap: 20}}>
-        <TextInput style={styles.input}
-          value={inputValue}
-          onChangeText={(value) => setInputValue(value)}
-          placeholder='To-do Name'
+      <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: THEME.COLORS.MARRON }}>To-do List</Text>
+      <View style={{ flexDirection: 'row', marginVertical: 20, gap: 20 }}>
+      <TextInput
+        style={styles.input}
+        value={state.inputValue}
+        onChangeText={(value) => dispatch({ type: 'UPDATE_INPUT_VALUE', payload: value })}
+        placeholder='To-do Name'
+      />
+
+        <ItemButton
+          onPressFunction={state.editing ? handleEditPendingTodo : handleAddTodo}
+          text={state.editing ? 'Edit Task' : 'Add Task'}
         />
-        <ItemButton 
-           onPressFunction={editing ? handleEditPendingTodo : handleAddTodo}
-           text={editing ? 'Edit Task' : 'Add Task'}
-          />
       </View>
-        <FlatList 
-          data={todos}
-          renderItem={(({ item: {name, id, created, updated, isCompleted}}) => {
-            return(
-              <TaskButton 
-                id={id} name={name} isCompleted={isCompleted}
-                handleDelete={handleDeleteTask} handleComplete={handleCompletedTask}
-                handleEdit={handleEditTodo} 
-                createdAt={created} updatedAt={updated}
-              />
-            )
-          })}
-          keyExtractor={(item) => item.id}
-        />
+      <FlatList
+        data={state.todos} // Access todos from the state object
+        renderItem={({ item }) => {
+          const { name, id, created, updated, isCompleted } = item;
+          return (
+            <TaskButton
+              id={id} name={name} isCompleted={isCompleted}
+              handleDelete={() => handleDeleteTask(id)}
+              handleComplete={() => handleCompletedTask(id)}
+              handleEdit={() => handleEditTodo(id)}
+              createdAt={created} updatedAt={updated}
+            />
+          )
+        }}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({
